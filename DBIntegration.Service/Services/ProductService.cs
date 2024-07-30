@@ -18,38 +18,49 @@ namespace DBIntegration.Service.Services
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Product>> GetProductsAsync()
+        public void AddProduct(Product product)
         {
-            return await _dbContext.Products.ToListAsync();
+            _dbContext.Products.Add(product);
+            _dbContext.SaveChanges();
         }
 
-        public async Task<Product> GetProductByIdAsync(int id)
+        public List<Product> GetAllProducts()
         {
-            return await _dbContext.Products.FindAsync(id);
+            return _dbContext.Products.ToList();
         }
 
-        public async Task AddProductAsync(Product product)
+        public Product GetById(int Id)
         {
-            await _dbContext.Products.AddAsync(product);
-            await _dbContext.SaveChangesAsync();
+            var p=  _dbContext.Products.Where(p=>p.Id==Id).SingleOrDefault();
+            return p;
         }
 
-        public async Task UpdateProductAsync(Product product)
+        public void DeleteById(int Id)
         {
-            _dbContext.Products.Update(product);
-            await _dbContext.SaveChangesAsync();
-        }
-
-        public async Task DeleteProductAsync(int id)
-        {
-            var product = await _dbContext.Products.FindAsync(id);
-            if (product != null)
+            var p = _dbContext.Products.Where(p => p.Id == Id).SingleOrDefault();
+            if (p != null)
             {
-                _dbContext.Products.Remove(product);
-                await _dbContext.SaveChangesAsync();
+                _dbContext.Products.Remove(p);
+                _dbContext.SaveChanges();
+  
+            }
+           
+        }
+
+        public void  EditProduct(int Id, Product product)
+        {
+            var p= _dbContext.Products.Where(product => product.Id ==Id).SingleOrDefault();
+            if (p != null)
+            {
+                p.Name = product.Name;
+                p.Price = product.Price;
+                _dbContext.SaveChanges();
             }
 
-
         }
+
+
     }
-}
+
+ }
+

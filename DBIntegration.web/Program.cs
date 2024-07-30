@@ -34,6 +34,7 @@ namespace DBIntegration.web
             app.UseRouting();
 
             app.UseAuthorization();
+            app.MapControllers();
 
             app.MapRazorPages();
 
