@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DBIntegration.Db\DBIntegration.Db.csproj" />
+    <ProjectReference Include="..\DBIntegration.Model\DBIntegration.Model.csproj" />
+  </ItemGroup>
+
+</Project>
